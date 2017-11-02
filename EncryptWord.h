@@ -29,6 +29,14 @@ public:
 	// postcondition: object initialized with default values.  All object attributes are private and cannot be directly accessed.
 	EncryptWord();
 
+	EncryptWord(EncryptWord &);
+
+	EncryptWord & operator=(EncryptWord &);
+
+	bool operator==(const EncryptWord &);
+
+	EncryptWord operator+(const EncryptWord &) const;
+
 
 	// definition: method accepts argument of type string, with a minimum of 4 characters. passed string will be returned as an encrypted string, pending condtions are met. encryption 
 	// will shift characters according to the "shift", a randomly generated value between 1 and 9. if "shift" value is equal to "3" all characters of passed string will

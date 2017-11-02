@@ -84,9 +84,13 @@ public:
 	// precondition: object ON (getNumberOfElements() >0) argument is an unsigned integer within legal bounds.
 	// postcondtion: FindFault object not impacted
 	string printCorruption(int) const;
+	bool encryptWordObjectsEqual(int, int) const;
+	void addEncryptWordObjects(int, int);
+	
 	// Definition: Destructor called at end of program to free up all heap allocated memory. Will delete both dynamic arrays from heap and set pointers 
 	// to point to NULL.
 	~FindFault();
+
 
 private:
 	void setNumberOfElements();

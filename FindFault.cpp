@@ -49,6 +49,14 @@ string FindFault::encrypt(string phrase) {
 	return phrase;
 }
 
+bool FindFault::encryptWordObjectsEqual(int elementOne, int elementTwo) const {
+	return (ewArray[elementOne-1] == ewArray[elementTwo-1]) ? true : false;
+}
+
+void FindFault::addEncryptWordObjects(int elementOne, int elementTwo){
+	EncryptWord addEncryptWord = (ewArray[elementOne -1] + ewArray[elementTwo -1]);
+	encrypt(addEncryptWord.getPhrase());
+}
 
 int FindFault::getQueryAttempts(bool corrupted) const {
 	if (corrupted == true) {

@@ -1,31 +1,26 @@
+
+
+
 #include "FindFault.h"
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-int main(){
-
-
+int main() {
 	FindFault ff;
-	ff.encrypt("adsfadsf");
-	ff.encrypt("sjdf;alsdjdfasdjfd");
 
-	FindFault ff1;
-	ff1.encrypt("ASDAFASDFADFADF");
-	ff1.encrypt("JLLKKLGgglghlghl");
+	ff.encrypt("ADSFSDF");
+	ff.encrypt("aslfjasjf");
 
-	FindFault lmn;
+	FindFault ff2;
+	ff2.encrypt("skldjfas;lfdj");
+	ff2.encrypt("afdasdfaf");
 
-	lmn = ff1;
-
-	cout << lmn.getNumberOfElements();
-
+	ff.addEncryptWordObjects(1, 2);
+	cout << ff.printCorruption(3);
+	
 	cin.get();
 
-
-
-
 	return 0;
-
 }

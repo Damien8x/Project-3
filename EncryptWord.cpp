@@ -17,6 +17,7 @@
 #include "EncryptWord.h"
 #include <iostream>
 #include <stdlib.h>
+#include <string>
 using namespace std;
 
 // class constants
@@ -56,6 +57,44 @@ EncryptWord::EncryptWord()
 	this->lowGuessCount = 0;
 	this->phrase = "";
 	this->encryptPhrase = "";
+}
+EncryptWord::EncryptWord(EncryptWord & obj) {
+	shift = obj.shift;
+	on = obj.on;
+	guessCount = obj.guessCount;
+	avgGuess = obj.avgGuess;
+	totalGuess = obj.totalGuess;
+	highGuessCount = obj.highGuessCount;
+	lowGuessCount = obj.lowGuessCount;
+	phrase = obj.phrase;
+	encryptPhrase = obj.encryptPhrase;
+}
+
+EncryptWord & EncryptWord::operator=(EncryptWord & obj) {
+	if (this != &obj) {
+		shift = obj.shift;
+		on = obj.on;
+		guessCount = obj.guessCount;
+		avgGuess = obj.avgGuess;
+		totalGuess = obj.totalGuess;
+		highGuessCount = obj.highGuessCount;
+		lowGuessCount = obj.lowGuessCount;
+		phrase = obj.phrase;
+		encryptPhrase = obj.encryptPhrase;
+	}
+	return *this;
+}
+
+bool EncryptWord::operator==(const EncryptWord & obj) {
+	return ((shift == obj.shift) && (on == obj.on) && (guessCount = obj.guessCount) && (avgGuess == obj.avgGuess) && (totalGuess == obj.totalGuess) &&
+		(highGuessCount == obj.highGuessCount) && (lowGuessCount == obj.lowGuessCount) && (phrase == phrase) && (encryptPhrase == obj.encryptPhrase)) ? true : false;
+}
+
+EncryptWord EncryptWord:: operator+(const EncryptWord & obj)const {
+	EncryptWord temp;
+	string tempPhrase = (phrase + obj.phrase);
+	temp.encrypt(tempPhrase);
+	return temp;
 }
 
 string EncryptWord::encrypt(string phrase)
