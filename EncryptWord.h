@@ -29,9 +29,10 @@ public:
 	// postcondition: object initialized with default values.  All object attributes are private and cannot be directly accessed.
 	EncryptWord();
 
-	EncryptWord(EncryptWord &);
+	EncryptWord(const EncryptWord &);
 
-	EncryptWord & operator=(EncryptWord &);
+
+	EncryptWord & operator=(const EncryptWord &);
 
 	bool operator==(const EncryptWord &);
 

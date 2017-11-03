@@ -35,7 +35,7 @@ FindFault::FindFault()
 	corruptedEncryption = 0;
 	encryptionNotCorrupted = 0;
 }
-FindFault::FindFault(FindFault& obj) {
+FindFault::FindFault(const FindFault& obj) {
 	numberOfElements = obj.numberOfElements;
 	corruptedEncryption = obj.corruptedEncryption;
 	encryptionNotCorrupted = obj.encryptionNotCorrupted;
@@ -47,7 +47,7 @@ FindFault::FindFault(FindFault& obj) {
 	}
 }
 
-FindFault & FindFault::operator=(FindFault & obj) {
+FindFault & FindFault::operator=(const FindFault & obj) {
 	if (this != &obj) {
 		delete[] ewArray;
 		delete[] phraseArray;
@@ -64,7 +64,7 @@ FindFault & FindFault::operator=(FindFault & obj) {
 	return *this;
 }
 
-bool FindFault::operator==(const FindFault & obj) {
+bool FindFault::operator==(const FindFault & obj)const {
 	if (numberOfElements != obj.numberOfElements) {
 		return false;
 	}

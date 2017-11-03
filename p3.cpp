@@ -30,6 +30,12 @@ int main() {
 	FindFault testAddition;
 	testAddition = ff + testCopy;
 
+	ff = testCopy = ff2;
+	cout << (ff == testCopy) << endl;
+	cout << (testCopy == ff2) << endl;
+
+	testCopy = ff + ff2 + testCopy;
+	cout << testCopy.getNumberOfElements() << endl;
 	cout << testAddition.getNumberOfElements() << endl;
 	cin.get();
 

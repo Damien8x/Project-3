@@ -58,7 +58,7 @@ EncryptWord::EncryptWord()
 	this->phrase = "";
 	this->encryptPhrase = "";
 }
-EncryptWord::EncryptWord(EncryptWord & obj) {
+EncryptWord::EncryptWord(const EncryptWord & obj) {
 	shift = obj.shift;
 	on = obj.on;
 	guessCount = obj.guessCount;
@@ -70,7 +70,7 @@ EncryptWord::EncryptWord(EncryptWord & obj) {
 	encryptPhrase = obj.encryptPhrase;
 }
 
-EncryptWord & EncryptWord::operator=(EncryptWord & obj) {
+EncryptWord & EncryptWord::operator=(const EncryptWord & obj) {
 	if (this != &obj) {
 		shift = obj.shift;
 		on = obj.on;
