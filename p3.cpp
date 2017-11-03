@@ -18,8 +18,19 @@ int main() {
 	ff2.encrypt("afdasdfaf");
 
 	ff.addEncryptWordObjects(1, 2);
-	cout << ff.printCorruption(3);
+	cout << ff.printCorruption(3) << endl;
+
+	ff = ff2;
+	cout << ff.printCorruption(1) << endl;
+
+	FindFault testCopy(ff);
+	cout << testCopy.printCorruption(1) << endl;
 	
+	cout << (testCopy == ff) << endl;
+	FindFault testAddition;
+	testAddition = ff + testCopy;
+
+	cout << testAddition.getNumberOfElements() << endl;
 	cin.get();
 
 	return 0;

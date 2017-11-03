@@ -37,6 +37,8 @@ public:
 
 	EncryptWord operator+(const EncryptWord &) const;
 
+	bool operator !=(const EncryptWord &);
+
 
 	// definition: method accepts argument of type string, with a minimum of 4 characters. passed string will be returned as an encrypted string, pending condtions are met. encryption 
 	// will shift characters according to the "shift", a randomly generated value between 1 and 9. if "shift" value is equal to "3" all characters of passed string will

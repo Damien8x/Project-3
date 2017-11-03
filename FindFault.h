@@ -84,6 +84,13 @@ public:
 	// precondition: object ON (getNumberOfElements() >0) argument is an unsigned integer within legal bounds.
 	// postcondtion: FindFault object not impacted
 	string printCorruption(int) const;
+	FindFault(FindFault&);
+
+	FindFault & operator=(FindFault &);
+
+	bool operator==(const FindFault &);
+
+	FindFault  operator+(const FindFault &) const;
 	bool encryptWordObjectsEqual(int, int) const;
 	void addEncryptWordObjects(int, int);
 	

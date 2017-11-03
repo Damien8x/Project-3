@@ -89,6 +89,10 @@ bool EncryptWord::operator==(const EncryptWord & obj) {
 	return ((shift == obj.shift) && (on == obj.on) && (guessCount = obj.guessCount) && (avgGuess == obj.avgGuess) && (totalGuess == obj.totalGuess) &&
 		(highGuessCount == obj.highGuessCount) && (lowGuessCount == obj.lowGuessCount) && (phrase == phrase) && (encryptPhrase == obj.encryptPhrase)) ? true : false;
 }
+bool EncryptWord::operator !=(const EncryptWord & obj) {
+	return ((shift == obj.shift) && (on == obj.on) && (guessCount = obj.guessCount) && (avgGuess == obj.avgGuess) && (totalGuess == obj.totalGuess) &&
+		(highGuessCount == obj.highGuessCount) && (lowGuessCount == obj.lowGuessCount) && (phrase == phrase) && (encryptPhrase == obj.encryptPhrase)) ? false : true;
+}
 
 EncryptWord EncryptWord:: operator+(const EncryptWord & obj)const {
 	EncryptWord temp;

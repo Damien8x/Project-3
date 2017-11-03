@@ -35,6 +35,78 @@ FindFault::FindFault()
 	corruptedEncryption = 0;
 	encryptionNotCorrupted = 0;
 }
+FindFault::FindFault(FindFault& obj) {
+	numberOfElements = obj.numberOfElements;
+	corruptedEncryption = obj.corruptedEncryption;
+	encryptionNotCorrupted = obj.encryptionNotCorrupted;
+	ewArray = new EncryptWord[numberOfElements];
+	phraseArray = new string[numberOfElements];
+	for (int i = 0; i < numberOfElements; i++) {
+		ewArray[i] = obj.ewArray[i];
+		phraseArray[i] = obj.phraseArray[i];
+	}
+}
+
+FindFault & FindFault::operator=(FindFault & obj) {
+	if (this != &obj) {
+		delete[] ewArray;
+		delete[] phraseArray;
+		numberOfElements = obj.numberOfElements;
+		corruptedEncryption = obj.corruptedEncryption;
+		encryptionNotCorrupted = obj.encryptionNotCorrupted;
+		ewArray = new EncryptWord[numberOfElements];
+		phraseArray = new string[numberOfElements];
+		for (int i = 0; i < numberOfElements; i++) {
+			ewArray[i] = obj.ewArray[i];
+			phraseArray[i] = obj.phraseArray[i];
+		}
+	}
+	return *this;
+}
+
+bool FindFault::operator==(const FindFault & obj) {
+	if (numberOfElements != obj.numberOfElements) {
+		return false;
+	}
+	for (int i = 0; i < numberOfElements; i++) {
+		if (ewArray[i].getEncryptPhrase() != obj.ewArray[i].getEncryptPhrase()) {
+			return false;
+		}
+	}
+	return (numberOfElements == obj.numberOfElements && corruptedEncryption == obj.corruptedEncryption && encryptionNotCorrupted == obj.encryptionNotCorrupted) ? true : false;
+	}
+
+FindFault  FindFault::operator+(const FindFault & obj) const {
+	FindFault temp;
+	/*
+	temp.numberOfElements = numberOfElements + obj.numberOfElements;
+	temp.corruptedEncryption = corruptedEncryption + obj.corruptedEncryption;
+	temp.encryptionNotCorrupted = encryptionNotCorrupted + obj.encryptionNotCorrupted;
+	
+
+	delete[] temp.ewArray;
+	delete[] temp.phraseArray;
+	temp.ewArray = new EncryptWord[temp.numberOfElements];
+	temp.phraseArray = new string[temp.numberOfElements];
+	
+	for (int i = 0; i <numberOfElements; i++) {
+		temp.ewArray[i] = ewArray[i];
+		temp.phraseArray[i] = phraseArray[i];
+	}
+	for (int t = 0; t < obj.numberOfElements; t++) {
+		temp.ewArray[(t+numberOfElements)-1] = obj.ewArray[t];
+		temp.phraseArray[(t+numberOfElements)-1] = obj.phraseArray[t];
+	}
+	*/
+	for (int i = 0; i < numberOfElements; i++) {
+		temp.encrypt(ewArray[i].getPhrase());
+	}
+	for (int t = 0; t < obj.numberOfElements; t++) {
+		temp.encrypt(obj.ewArray[t].getPhrase());
+	}
+	return  temp;
+}
+
 
 int FindFault::getNumberOfElements() const {
 	return numberOfElements;
