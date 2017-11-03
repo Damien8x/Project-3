@@ -88,7 +88,7 @@ public:
 
 	FindFault & operator=(const FindFault &);
 
-	bool operator==(const FindFault &)const;
+	bool operator==(const FindFault &) const;
 
 	FindFault  operator+(const FindFault &) const;
 	bool encryptWordObjectsEqual(int, int) const;

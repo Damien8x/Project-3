@@ -85,12 +85,12 @@ EncryptWord & EncryptWord::operator=(const EncryptWord & obj) {
 	return *this;
 }
 
-bool EncryptWord::operator==(const EncryptWord & obj) {
-	return ((shift == obj.shift) && (on == obj.on) && (guessCount = obj.guessCount) && (avgGuess == obj.avgGuess) && (totalGuess == obj.totalGuess) &&
+bool EncryptWord::operator==(const EncryptWord & obj)const {
+	return ((shift == obj.shift) && (on == obj.on) && (guessCount == obj.guessCount) && (avgGuess == obj.avgGuess) && (totalGuess == obj.totalGuess) &&
 		(highGuessCount == obj.highGuessCount) && (lowGuessCount == obj.lowGuessCount) && (phrase == phrase) && (encryptPhrase == obj.encryptPhrase)) ? true : false;
 }
-bool EncryptWord::operator !=(const EncryptWord & obj) {
-	return ((shift == obj.shift) && (on == obj.on) && (guessCount = obj.guessCount) && (avgGuess == obj.avgGuess) && (totalGuess == obj.totalGuess) &&
+bool EncryptWord::operator !=(const EncryptWord & obj)const {
+	return ((shift == obj.shift) && (on == obj.on) && (guessCount == obj.guessCount) && (avgGuess == obj.avgGuess) && (totalGuess == obj.totalGuess) &&
 		(highGuessCount == obj.highGuessCount) && (lowGuessCount == obj.lowGuessCount) && (phrase == phrase) && (encryptPhrase == obj.encryptPhrase)) ? false : true;
 }
 

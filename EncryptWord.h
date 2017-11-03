@@ -31,14 +31,13 @@ public:
 
 	EncryptWord(const EncryptWord &);
 
-
 	EncryptWord & operator=(const EncryptWord &);
 
-	bool operator==(const EncryptWord &);
+	bool operator==(const EncryptWord &) const;
 
 	EncryptWord operator+(const EncryptWord &) const;
 
-	bool operator !=(const EncryptWord &);
+	bool operator !=(const EncryptWord &) const;
 
 
 	// definition: method accepts argument of type string, with a minimum of 4 characters. passed string will be returned as an encrypted string, pending condtions are met. encryption 
