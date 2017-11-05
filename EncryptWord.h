@@ -28,17 +28,38 @@ public:
 	// precondition: constructor accepts no arguments. state of object is not applicable prior to call.
 	// postcondition: object initialized with default values.  All object attributes are private and cannot be directly accessed.
 	EncryptWord();
-
+	// ***************************************************************************************************************************************************
+	// START OF P3
+	//
+	// definition: copy constructor. creates a deep copy of passed EncryptWord object.
+	// precondition: Object may be OFF. must have an existing EncryptWord object to be used as argument.
+	// postcondition: new FindFault object created as deep copy of argument
 	EncryptWord(const EncryptWord &);
 
+	// definition: overloading assignment operator for type EncryptWord. Right value not impacted. Left value equal to right value.
+	// preconditon: object may be "OFF". minimum of one existing EncryptWord object to be used as argument(s)
+	// postcondition: left EncryptWord object assigned values of right EncryptWord object. Left object may have 0:N attributes altered
 	EncryptWord & operator=(const EncryptWord &);
 
+	// definition: compares all attributes of left argument to attributes of right object for equivalency. Neither object mutated. returns true if argument attribues are equal.
+	// precondition: Object may be "OFF". minimum of one existing object to be used as argument(s)
+	// postcondition: neither argument impacted
 	bool operator==(const EncryptWord &) const;
 
+	// definition: overloading addition operator, appending the right Encryptword phrase argument to the right EncryptWord argument and re-encrypting the word produced.
+	// a new, unique shift value will be used for encryption of the new EncryptWord object. All other attributes will be set to default.
+	// precondition: objects may be "OFF".  both left and right arguments must be EncryptWord object's. Left andd right arguments may be equivalent.
+	// postcondition: arguments not impacted. New EncryptWord object created with phrase attribute equal to the concatenation of left and right argument.
+	// shift value may or may not be the same as arguments. All other attributes set to default values.
 	EncryptWord operator+(const EncryptWord &) const;
 
+	// definition: overloading not equal to operator. Compares values of left and right arguments for equivalency. returns true if argument attributes are not equal.
+	// precondition: Objects may be "OFF".minimum of one existing EncryptWord object to be used as argument(s)
+	// postcondition: neither argument impacted.
 	bool operator !=(const EncryptWord &) const;
-
+	//
+	// END OF P3
+	//*******************************************************************************************************************************************************
 
 	// definition: method accepts argument of type string, with a minimum of 4 characters. passed string will be returned as an encrypted string, pending condtions are met. encryption 
 	// will shift characters according to the "shift", a randomly generated value between 1 and 9. if "shift" value is equal to "3" all characters of passed string will

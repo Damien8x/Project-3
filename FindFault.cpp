@@ -64,6 +64,18 @@ FindFault & FindFault::operator=(const FindFault & obj) {
 	return *this;
 }
 
+bool FindFault::operator!=(const FindFault & obj) const{
+	if (numberOfElements != obj.numberOfElements) {
+		return true;
+	}
+	for (int i = 0; i < numberOfElements; i++) {
+		if (ewArray[i].getEncryptPhrase() != obj.ewArray[i].getEncryptPhrase()) {
+			return true;
+		}
+	}
+	return ((corruptedEncryption == obj.corruptedEncryption) && (encryptionNotCorrupted == obj.encryptionNotCorrupted)) ? false : true;
+}
+
 bool FindFault::operator==(const FindFault & obj)const {
 	if (numberOfElements != obj.numberOfElements) {
 		return false;
@@ -73,7 +85,7 @@ bool FindFault::operator==(const FindFault & obj)const {
 			return false;
 		}
 	}
-	return (numberOfElements == obj.numberOfElements && corruptedEncryption == obj.corruptedEncryption && encryptionNotCorrupted == obj.encryptionNotCorrupted) ? true : false;
+	return ((corruptedEncryption == obj.corruptedEncryption) && (encryptionNotCorrupted == obj.encryptionNotCorrupted)) ? true : false;
 	}
 
 FindFault  FindFault::operator+(const FindFault & obj) const {

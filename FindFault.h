@@ -29,7 +29,8 @@ using namespace std;
 // ON-> ON (encrypt() -> encrypt())
 // ON-> ON (Encrypt() -> getNumberOfElements())
 // ON-> ON (encrypt() -> detectCorruption()) 
-//
+// ON-> ON (encrypt() -> addEncryptWordObject())
+// ON-> ON (encrypt() -> encryptWordObjectsEqual())
 //*INVARIANTS*
 // FindFault.encrypt(string) -> argument must be a minimum of 4 characters
 // FindFault.detectCorruption(int) -> object must be ON. argument must be greater than 0 and equal or less than FindFault.getNumberOfElements().
@@ -50,6 +51,55 @@ public:
 	// precondition: constructor accepts no arguments. state of object is not applicable prior to call.
 	// postcondition: object initialized with default values.  All object attributes are private and cannot be directly accessed.
 	FindFault();
+	//****************************************************************************************************************************************
+	// START OF P3
+	//
+	// Definition: Deep copy constructor for FindFault. Creates new FindFault object equal to FindFault argument
+	// precondition: Object may be "OFF".  Must have FindFault object to be used as argument
+	// postcondition: creates new FindFault object in state equal to argument
+	FindFault(const FindFault&);
+
+	// Definition: Assigns values of FindFault right object to the FindFault left object. overwriting any values of the left FindFault argument.
+	// precondition: Objects may be "OFF".  minimum of one Existing FindFault object to be used as argument(s)
+	// postcondition: If right object != left object all Left object attributes will be set to the attributes of right object
+	FindFault & operator=(const FindFault &);
+
+	// Definition: Overloads "==" operator, checking if left object attributes are equal to right object attributes. Only checks if EncryptWord.getPhrase() attributes are equal
+	// when commparing collections. Other EncryptWord objects may be different andd still return true.
+	// precondition: Object may be "OFF"  minimum of one existing FindFault object to be used as argument(s)
+	// postcondition: arguments not impacted by method
+	bool operator==(const FindFault &) const;
+
+	// Definition: Overloads "!=" operator, checking if left object attributes are equal to right object attributes. Only checks if EncryptWord.getPhrase() attributes are equal
+	// when commparing collections. Other EncryptWord objects may be different andd still return true.
+	// precondition: Object may be "OFF"  minimum of one existing FindFault object to be used as argument(s)
+	// postcondition: arguments not impacted by method
+	bool operator  !=(const FindFault &) const;
+
+	// Definition: Overloads "+" operator, creating a new object with an array in size equal to the array of left argument + array of right argument, encapsulating
+	// EncryptWord objects with an equal EncryptWord.getPhrase() to the corresponding objects of the arguments. Right argument's array is appended to the Left arguments array.
+	// phraseArray will also append right Argument to left argument. FindFault.numberOfElements will reflect the new neumber of elements. Counts for encryption corruption will 
+	// be set to default values.
+	// precondition: Object may be "OFF". minimum of  one existing FinddFault object to be used as argument(s)
+	// postcondition: new Findfault argument created encapsulating objects equivalent to left and right arguments.
+	FindFault  operator+(const FindFault &) const;
+	
+	// Definition: First argument corresponds to element number of left EncryptWord argument, to be compared to the right EncryptWord object (right argument(element number of right object))
+	// will return true if left EncryptWord.getPhrase() is equal to right EcryptWord.getPhrase().  both arguments must be greater than zero and less than or equal to FindFault.getNumberOfElements()
+	// precondition: Object must be "ON". FindFault object encapsulating a minimum of one EncryptWord object, so that its position may be referenced as an argument(s)
+	// postcondition: no objects impacted by function
+	bool encryptWordObjectsEqual(int, int) const;
+
+	// Definition: First argument corresponds to element number of left EncryptWord argument, to be added to the right EncryptWord object (right argument(element number of right object))
+	// method will add elements, appending rightObject.getPhrase() to leftObject.getPhrase(), and create new EncryptWord object which will then be appended to existing collection as the next
+	// element in the array.
+	// precondition: Object must be "ON".  minimum of one existing FindFault object in valid state to be used as argument(s). both arguments must be greater than zero and less than or equal to FindFault.getNumberOfElements()
+	// postcondition: creation of a new EncryptWord object having the phrase attribute equal to the concatenation of the left and right argument's phrase values added to the EncryptWord
+	// collection. numberOfElements will increase by one. 
+	void addEncryptWordObjects(int, int);
+	
+	// END OF P3
+	//***************************************************************************************************************************************
 	// Definition: returns number of EncryptWord objects contained in FindFault class. Method should be referenced to determine
 	// legal argument boundries for FindFault.decrypt() method, FindFault.detectCorruption() method. 
 	// precondition: none
@@ -84,16 +134,7 @@ public:
 	// precondition: object ON (getNumberOfElements() >0) argument is an unsigned integer within legal bounds.
 	// postcondtion: FindFault object not impacted
 	string printCorruption(int) const;
-	FindFault(const FindFault&);
 
-	FindFault & operator=(const FindFault &);
-
-	bool operator==(const FindFault &) const;
-
-	FindFault  operator+(const FindFault &) const;
-	bool encryptWordObjectsEqual(int, int) const;
-	void addEncryptWordObjects(int, int);
-	
 	// Definition: Destructor called at end of program to free up all heap allocated memory. Will delete both dynamic arrays from heap and set pointers 
 	// to point to NULL.
 	~FindFault();
