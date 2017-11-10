@@ -1,7 +1,7 @@
 // Author: Damien Sudol
 // Filename: EncryptWord P2
 // Date: 10/16/2017
-// Version: 1.1
+// Version: 1.3
 
 #ifndef FINDFAULT_H
 #define FINDFAULT_H
@@ -81,9 +81,15 @@ public:
 	// phraseArray will also append right Argument to left argument. FindFault.numberOfElements will reflect the new neumber of elements. Counts for encryption corruption will 
 	// be set to default values.
 	// precondition: Object may be "OFF". minimum of  one existing FinddFault object to be used as argument(s)
-	// postcondition: new Findfault argument created encapsulating objects equivalent to left and right arguments.
+	// postcondition: new Findfault object created encapsulating objects equivalent to left and right arguments.
 	FindFault  operator+(const FindFault &) const;
-	
+
+	// Definition: Overloads "+=" operator, simultaneously adding the right object the left object and assinging the new sum to the left argument.
+	// precondition: Object may be "OFF". minimum of  one existing FinddFault object to be used as argument(s)
+	// postcondition: left object will increase numberOfElements by the numberOfElements in the right argument. left object will also encapsulate copies
+	// of all elements contained in the right arguments ewArray and phraseArray. All other attributes will remain the same.
+	FindFault & operator+=(const FindFault &);
+
 	// Definition: First argument corresponds to element number of left EncryptWord argument, to be compared to the right EncryptWord object (right argument(element number of right object))
 	// will return true if left EncryptWord.getPhrase() is equal to right EcryptWord.getPhrase().  both arguments must be greater than zero and less than or equal to FindFault.getNumberOfElements()
 	// precondition: Object must be "ON". FindFault object encapsulating a minimum of one EncryptWord object, so that its position may be referenced as an argument(s)
@@ -98,6 +104,13 @@ public:
 	// collection. numberOfElements will increase by one. 
 	void addEncryptWordObjects(int, int);
 	
+	// definition: adds and assigns EncryptWord objects using overloadded += operator. First integer argument represents element position of left argument. 
+	// second integer argument represents element position of right argument. overloaded operator concatenates decrypted phrases, re-encrypts, and assigns
+	// new value to left object.
+	// pre condition:Object must be "ON". Both arguments must be greater than 0 and less than or equal to this->numberOfElements.
+	// postcondition: right object not impacted. left object has newly encrypted, concatenated string of left andd right phrase values, new shift value, and all other
+	// values set to default.
+	void addAssignEncryptWordObjects(int, int);	
 	// END OF P3
 	//***************************************************************************************************************************************
 	// Definition: returns number of EncryptWord objects contained in FindFault class. Method should be referenced to determine

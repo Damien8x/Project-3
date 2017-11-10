@@ -1,7 +1,7 @@
 // Author: Damien Sudol
 // Filename: EncryptWord P2
 // Date: 10/16/2017
-// Version: 1.1
+// Version: 1.3
 //
 // Description: class aims to provide functions in a logical, efficient format, capable of encrypting passed strings greater than 3 characters, using a caesar cryptic shift.
 // In addition, class provides necessary functions to fascilitate a guessing game from passed data in relation to the shift value used during encryption.
@@ -58,6 +58,9 @@ EncryptWord::EncryptWord()
 	this->phrase = "";
 	this->encryptPhrase = "";
 }
+
+// *****************************************************************************************************************************************
+// start of P3
 EncryptWord::EncryptWord(const EncryptWord & obj) {
 	shift = obj.shift;
 	on = obj.on;
@@ -101,6 +104,15 @@ EncryptWord EncryptWord:: operator+(const EncryptWord & obj)const {
 	return temp;
 }
 
+EncryptWord &  EncryptWord::operator+=(const EncryptWord & obj){
+	string tempPhrase = phrase + obj.phrase;
+	this->objectReset();
+	this->encrypt(tempPhrase);
+	return * this;
+}	
+
+// End of P3
+// *******************************************************************************************************************************************
 string EncryptWord::encrypt(string phrase)
 {
 	int phraseLength = phrase.length();

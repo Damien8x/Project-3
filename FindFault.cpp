@@ -1,7 +1,7 @@
 // Author: Damien Sudol
 // Filename: EncryptWord P2
 // Date: 10/16/2017
-// Version: 1.1
+// Version: 1.3
 
 #include "FindFault.h"
 #include <string>
@@ -35,6 +35,11 @@ FindFault::FindFault()
 	corruptedEncryption = 0;
 	encryptionNotCorrupted = 0;
 }
+
+// **************************************************************************************************************************************************************
+// Start of P3
+
+
 FindFault::FindFault(const FindFault& obj) {
 	numberOfElements = obj.numberOfElements;
 	corruptedEncryption = obj.corruptedEncryption;
@@ -90,26 +95,6 @@ bool FindFault::operator==(const FindFault & obj)const {
 
 FindFault  FindFault::operator+(const FindFault & obj) const {
 	FindFault temp;
-	/*
-	temp.numberOfElements = numberOfElements + obj.numberOfElements;
-	temp.corruptedEncryption = corruptedEncryption + obj.corruptedEncryption;
-	temp.encryptionNotCorrupted = encryptionNotCorrupted + obj.encryptionNotCorrupted;
-	
-
-	delete[] temp.ewArray;
-	delete[] temp.phraseArray;
-	temp.ewArray = new EncryptWord[temp.numberOfElements];
-	temp.phraseArray = new string[temp.numberOfElements];
-	
-	for (int i = 0; i <numberOfElements; i++) {
-		temp.ewArray[i] = ewArray[i];
-		temp.phraseArray[i] = phraseArray[i];
-	}
-	for (int t = 0; t < obj.numberOfElements; t++) {
-		temp.ewArray[(t+numberOfElements)-1] = obj.ewArray[t];
-		temp.phraseArray[(t+numberOfElements)-1] = obj.phraseArray[t];
-	}
-	*/
 	for (int i = 0; i < numberOfElements; i++) {
 		temp.encrypt(ewArray[i].getPhrase());
 	}
@@ -119,6 +104,30 @@ FindFault  FindFault::operator+(const FindFault & obj) const {
 	return  temp;
 }
 
+FindFault & FindFault::operator+=(const FindFault & obj){
+	int toAdd = obj.numberOfElements;
+	for (int t = 0; t < toAdd; t++) {
+		this->encrypt(obj.ewArray[t].getPhrase());
+	}
+	return * this;
+}
+
+void FindFault::addAssignEncryptWordObjects(int left, int right){
+	ewArray[left-1]+= ewArray[right-1];
+}
+
+bool FindFault::encryptWordObjectsEqual(int elementOne, int elementTwo) const {
+	return (ewArray[elementOne-1] == ewArray[elementTwo-1]) ? true : false;
+}
+
+void FindFault::addEncryptWordObjects(int elementOne, int elementTwo){
+	EncryptWord addEncryptWord = (ewArray[elementOne -1] + ewArray[elementTwo -1]);
+	encrypt(addEncryptWord.getPhrase());
+}
+
+
+// End of P3
+// ****************************************************************************************************************************************************
 
 int FindFault::getNumberOfElements() const {
 	return numberOfElements;
@@ -131,15 +140,6 @@ string FindFault::encrypt(string phrase) {
 	phrase = corruptionPossible(phrase);
 	phrase = ewArray[getNumberOfElements() - 1].encrypt(phrase);
 	return phrase;
-}
-
-bool FindFault::encryptWordObjectsEqual(int elementOne, int elementTwo) const {
-	return (ewArray[elementOne-1] == ewArray[elementTwo-1]) ? true : false;
-}
-
-void FindFault::addEncryptWordObjects(int elementOne, int elementTwo){
-	EncryptWord addEncryptWord = (ewArray[elementOne -1] + ewArray[elementTwo -1]);
-	encrypt(addEncryptWord.getPhrase());
 }
 
 int FindFault::getQueryAttempts(bool corrupted) const {

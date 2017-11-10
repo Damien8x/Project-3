@@ -1,7 +1,7 @@
 // Author: Damien Sudol
 // Filename: EncryptWord P2
 // Date: 10/16/2017
-// Version: 1.1
+// Version: 1.3
 //
 // Description: class aims to provide functions in a logical, efficient format, capable of encrypting passed strings greater than 3 characters, using a caesar cryptic shift.
 // In addition, class provides necessary functions to fascilitate a guessing game from passed data in relation to the shift value used during encryption.
@@ -41,9 +41,15 @@ public:
 	// postcondition: left EncryptWord object assigned values of right EncryptWord object. Left object may have 0:N attributes altered
 	EncryptWord & operator=(const EncryptWord &);
 
+	// definition: concatenates left objects encrypted phrase with right arguments encrypted phrase, then re-encrypts concatenated string and assigns the new value to the left object.
+	// shift value may or may not change.
+	// precondition: Object's may be "OFF". minimum of one existing EncryptWord object to be used as argument(s);
+	// postcondition: right object not impacted. left object may have new shift value. Left argument will have new encrypted phrase. All other attributes will be set to default
+	EncryptWord & operator+=(const EncryptWord &);	
+
 	// definition: compares all attributes of left argument to attributes of right object for equivalency. Neither object mutated. returns true if argument attribues are equal.
 	// precondition: Object may be "OFF". minimum of one existing object to be used as argument(s)
-	// postcondition: neither argument impacted
+	// postcondition: left and right objects not impacted
 	bool operator==(const EncryptWord &) const;
 
 	// definition: overloading addition operator, appending the right Encryptword phrase argument to the right EncryptWord argument and re-encrypting the word produced.
